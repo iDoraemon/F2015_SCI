@@ -1,5 +1,40 @@
-extends layout
+script(type="text/javascript").
+    function decrypt_01() {
 
-block content
-  h1= title
-  p Welcome to #{title}
+    }
+
+extends ../node_modules/jade-bootstrap/_bootstrap
+
+append body
+    .jumbotron
+        .container
+            h1 Affine Cipher
+                p
+                    | Week 3 Practical Example
+    .container
+        +tab-list(["Problem 3.4.2", "Problem 3.4.3", "Problem 3.4.4", "Problem 3.4.5"],0)
+            +tab("0","active")
+                br
+                +panel-info("Detail")
+                    p Decrypt the following string
+                    p NYSYXDSYAXDKYALMWVKYADWDPROPYSNYSYXDKYACZM
+                .row
+                    .col-lg-12
+                        .form-group
+                            .input-group
+                                input.form-control(type="text", id="code1", value='NYSYXDSYAXDKYALMWVKYADWDPROPYSNYSYXDKYACZM', readonly)
+                                span.input-group-btn
+                                    button.btn.btn-default(type="button",aria-label="eye-open", onclick="decrypt_01()")
+                                        +icon("eye-open")
+                                input.form-control(type="text", id="result1", value='', readonly)
+            +tab("1")
+                h1 Profile
+                p This is Profile tab
+            +tab("2")
+                h1 Messages
+                p This is Messages tab
+            +tab("3")
+                h1 Settings
+                p This is Settings tab
+
+
