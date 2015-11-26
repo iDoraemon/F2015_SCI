@@ -1,40 +1,145 @@
-script(type="text/javascript").
-    function decrypt_01() {
-
-    }
-
 extends ../node_modules/jade-bootstrap/_bootstrap
 
 append body
-    .jumbotron
+    script.
+        $.formUtils.addValidator({
+            name: 'checkGCD',
+            validatorFunction: function (value) {
+                return (gcd(value, 26) == 1);
+            },
+            errorMessage: 'Enter a such that GCD(a, 26) = 1',
+            errorMessageKey: 'badNumber'
+        });
+        $(document).ready(function() {
+            $.validate({
+                form: '#form'
+            });
+            $('.hide').hide();
+            $('#button1').click(function () {
+                $('#author').css('display', 'block');
+            });
+        });
+
+    // Navigation bar
+    nav(class=["navbar", "navbar-inverse", "navbar-fixed-top"])
         .container
-            h1 Affine Cipher
-                p
-                    | Week 3 Practical Example
+            .navbar-header
+                button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#" + id, aria-expanded="false", aria-controls="navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href="#")= "Playground"
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li(class=["dropdown", active])
+                        a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" )= "Toybox"
+                            span.caret
+                        ul.dropdown-menu( role="menu" )
+                            li
+                                a(href="#", role="button")= "Placeholder"
+                    li
+                        a(href="https://github.com/iDoraemon", role="button", aria-expanded="false")= "Github"
+
+    // Carousel
+    .carousel(id="carousel-01", data-ride="carousel", class="slide")
+        .carousel-inner(role="listbox")
+            .item.active(style="height: 200px")
+                img(src="http://i.huffpost.com/gen/2577354/images/o-ENCRYPTION-facebook.jpg", style="width:100%")
+                .carousel-caption
+                    h1 Affine Cipher
+                    p Week 3 Practical Exercices
+
+    // Main
     .container
         +tab-list(["Problem 3.4.2", "Problem 3.4.3", "Problem 3.4.4", "Problem 3.4.5"],0)
+
+            // Tab 1
             +tab("0","active")
                 br
-                +panel-info("Detail")
-                    p Decrypt the following string
-                    p NYSYXDSYAXDKYALMWVKYADWDPROPYSNYSYXDKYACZM
+                +label-info("Detail")
+                ul
+                    li Use strong affine cipher.
+                    li Assume the mapping of A - 0, B - 1, C - 2, ..., Z - 25.
+                    li #[i#[strong  a = 9]] and #[i#[strong b = 2]]
+                br
                 .row
-                    .col-lg-12
+                    .col-md-12
                         .form-group
                             .input-group
                                 input.form-control(type="text", id="code1", value='NYSYXDSYAXDKYALMWVKYADWDPROPYSNYSYXDKYACZM', readonly)
                                 span.input-group-btn
-                                    button.btn.btn-default(type="button",aria-label="eye-open", onclick="decrypt_01()")
+                                    button.btn.btn-default(type="button",aria-label="eye-open", onclick="decrypt_01()", id="button1")
                                         +icon("eye-open")
-                                input.form-control(type="text", id="result1", value='', readonly)
-            +tab("1")
-                h1 Profile
-                p This is Profile tab
-            +tab("2")
-                h1 Messages
-                p This is Messages tab
-            +tab("3")
-                h1 Settings
-                p This is Settings tab
+                                input.form-control(type="text", id="result1", placeholder="Encrypted text will be displayed here", readonly)
+                div(id="author" style="display:none")
+                    p This quote is said by Satchel Paige
 
+            // Tab 2
+            +tab("1")
+                br
+                +label-info("Detail")
+                ul
+                    li Encrypt your first, middle, and last names using a shift cipher.
+                    li Concatenate the three names with no punctuation marks or spaces.
+                    li #[i#[strong k = 7]]
+                br
+                .row
+                    .col-md-12
+                        .form-group
+                            .input-group
+                                input.form-control(type="text", id="code2", value="Le Minh Pham Hoang", placeholder="Enter your name")
+                                span.input-group-btn
+                                    button.btn.btn-default(type="button",aria-label="eye-open", onclick="decrypt_02()")
+                                        +icon("eye-open")
+                                input.form-control(type="text", id="result2", placeholder="Encrypted text will be displayed here", readonly)
+
+            // Tab 3
+            +tab("2")
+                br
+                +label-info("Detail")
+                ul
+                    li Encrypt: "#[i The only thing we have to fear is fear itself]".
+                    li Use affine cipher.
+                    li Ignore punctuation marks and spaces.
+                    li Get and validate #[i#[strong a]], #[i#[strong b]] from user's input.
+                br
+                form(id="form")
+                    .row
+                        .col-md-3
+                        .col-md-6
+                            button(type="button", style="display: none; width: 0px; height: 0px;")
+                            .form-group
+                                .input-group
+                                    .input-group-addon
+                                        = "a"
+                                    input.form-control(type="number", id="param1", value="11", placeholder="Enter a", data-validation="checkGCD" )
+                            .form-group
+                                .input-group
+                                    .input-group-addon
+                                        = "b"
+                                    input.form-control(type="number", name="b", id="param2", value="15", placeholder="Enter b", data-validation="required", data-validation-error-msg="Can't be left blank")
+                        .col-md-3
+                    .row
+                        .col-md-12
+                            .form-group
+                                .input-group
+                                    input.form-control(type="text", id="code3", value="The only thing we have to fear is fear itself", readonly)
+                                    span.input-group-btn
+                                        button.btn.btn-default(type="button",aria-label="eye-open", onclick="decrypt_03()")
+                                            +icon("eye-open")
+                                    input.form-control(type="text", id="result3", placeholder="Encrypted text will be displayed here", readonly)
+
+            // Tab 4
+            +tab("3")
+                br
+                +label-info("Detail")
+                ul
+                    li What is the size of the key space of an affine cipher that uses the letters of the #[strong Greek alphabet]?
+                p Since the Greek alphabet has 24 characters, the key space will be 24.
+
+    // Footer
+    footer.footer
+        .container
+            p.text-muted Le Minh Pham Hoang - SE03035 - CS0801
 
