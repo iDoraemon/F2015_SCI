@@ -15,7 +15,7 @@ function gcd(a, b) {
     return gcd(b, a % b);
 }
 
-function decrypt_01() {
+function func01() {
     ENCRYPTED = document.getElementById("code1").value.split('');
     DECRYPTED = '';
     ENCRYPTED.forEach(function(letter) {
@@ -24,7 +24,7 @@ function decrypt_01() {
     document.getElementById("result1").value = DECRYPTED;
 }
 
-function decrypt_02() {
+function func02() {
     NAME = document.getElementById("code2").value.replace(' ','').split('');
     ENCRYPTED = '';
     NAME.forEach(function(letter) {
@@ -37,7 +37,7 @@ function decrypt_02() {
     document.getElementById("result2").value = ENCRYPTED;
 }
 
-function decrypt_03() {
+function func03() {
     a = parseInt(document.getElementById("param1").value);
     b = parseInt(document.getElementById("param2").value);
     CODE = document.getElementById("code3").value.replace(' ','').split('');
@@ -50,4 +50,20 @@ function decrypt_03() {
        }
     });
     document.getElementById("result3").value = ENCRYPTED;
+}
+
+function func04() {
+
+}
+
+function func05() {
+
+}
+
+function func06() {
+
+}
+
+function func07() {
+
 }
