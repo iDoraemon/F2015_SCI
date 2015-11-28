@@ -46,9 +46,9 @@ append body
     .carousel(id="carousel-01", data-ride="carousel", class="slide")
         .carousel-inner(role="listbox")
             .item.active(style="height: 250px")
-                img(src="http://i.huffpost.com/gen/2577354/images/o-ENCRYPTION-facebook.jpg", style="width:100%")
+                img(src="images/img_01.jpg", style="width:100%")
             .item(style="height: 250px")
-                img(src="http://tech.eu/wp-content/uploads/2014/04/ZenMate.jpg", style="width:100%")
+                img(src="images/img_02.jpg", style="width:100%")
             .carousel-caption
                 h1 Information Security
                 p Practical Exercices
@@ -233,27 +233,27 @@ append body
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "r0"
-                                                                input.form-control(type="number", id="w4_ex1_param1",placeholder="Enter a", data-validation="required" data-validation-error-msg="Must not be blank")
+                                                                input.form-control(type="number", id="w4_ex1_param1",placeholder="Enter r0", data-validation="required" data-validation-error-msg="Must not be blank")
                                                         .form-group
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "r1"
-                                                                input.form-control(type="number", name="b", id="w4_ex1_param2", placeholder="Enter b", data-validation="required", data-validation-error-msg="Must not be blank")
+                                                                input.form-control(type="number", name="b", id="w4_ex1_param2", placeholder="Enter r1", data-validation="required", data-validation-error-msg="Must not be blank")
                                                         .form-group
                                                             input.btn.btn-primary.btn-sm(type="submit", id="w4_ex1_button", aria-label="eye-open", onclick="func04()" value="Run")
                                                     .col-md-5
                                                         .form-group
                                                             .input-group
                                                                 .input-group-addon
-                                                                    = "r"
-                                                                input.form-control(type="text", id="w4_ex1_r", readonly)
-                                                            .input-group
-                                                                .input-group-addon
                                                                     = "s"
                                                                 input.form-control(type="text", id="w4_ex1_s", readonly)
                                                             .input-group
                                                                 .input-group-addon
-                                                                    = "GCD(a, b)"
+                                                                    = "t"
+                                                                input.form-control(type="text", id="w4_ex1_t", readonly)
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "GCD(r0, r1)"
                                                                 input.form-control(type="text", id="w4_ex1_gcd", readonly)
 
                                 // Problem 7.4.2
@@ -276,19 +276,14 @@ append body
                                                 .row
                                                     .col-md-5
                                                         .form-group
-                                                            label Run 1<sup>st</sup> option
-                                                            .input-group
-                                                                span.input-group-btn
-                                                                    button.btn.btn-primary(type="submit", id="w4_ex2_button1", aria-label="eye-open", onclick="func05()")
-                                                                        +icon("eye-open")
-                                                                input.form-control(type="text", id="w4_ex2_result1", placeholder="Result will be displayed here", readonly)
+                                                            input.form-control(type="text", id="w4_ex2_result1", placeholder="Result will be displayed here", readonly)
                                                         .form-group
-                                                            label Run 2<sup>nd</sup> option
+                                                            input.form-control(type="text", id="w4_ex2_result2", placeholder="Result will be displayed here", readonly)
+                                                        .form-group
                                                             .input-group
-                                                                span.input-group-btn
-                                                                    button.btn.btn-primary(type="submit", id="w4_ex2_button2", aria-label="eye-open", onclick="func06()")
-                                                                        +icon("eye-open")
-                                                                input.form-control(type="text", id="w4_ex2_result2", placeholder="Result will be displayed here", readonly)
+                                                                .input-group-btn
+                                                                    button.btn.btn-primary(type="submit", id="w4_ex2_button1", aria-label="eye-open", onclick="func05()")= "Run Option 1"
+                                                                    button.btn.btn-primary(type="submit", id="w4_ex2_button2", aria-label="eye-open", onclick="func06()")= "Run Option 2"
 
                                 // Problem 7.4.8
                                 .tab-pane.fade(id="w4_p3")
