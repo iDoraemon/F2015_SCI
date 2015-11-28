@@ -4,7 +4,7 @@ append body
     script.
         $.formUtils.addValidator({
             name: 'checkGCD',
-            validatorFunction: function (value) {
+            validatorFunction: function(value, $el, config, language, $form) {
                 return (gcd(value, 26) == 1);
             },
             errorMessage: 'Enter a such that GCD(a, 26) = 1',
@@ -12,10 +12,11 @@ append body
         });
         $(document).ready(function() {
             $.validate({
+                modules : 'toggleDisabled',
                 form: '#form'
             });
             $('.hide').hide();
-            $('#button1').click(function () {
+            $('#button1').click(function() {
                 $('#author').css('display', 'block');
             });
         });
@@ -24,7 +25,7 @@ append body
     nav(class=["navbar", "navbar-inverse", "navbar-fixed-top"])
         .container
             .navbar-header
-                button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#" + id, aria-expanded="false", aria-controls="navbar")
+                button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#undefined", aria-expanded="false", aria-controls="navbar")
                     span.sr-only Toggle navigation
                     span.icon-bar
                     span.icon-bar
@@ -33,9 +34,9 @@ append body
             .collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li(class=["dropdown", active])
-                        a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" )= "Toybox"
+                        a.dropdown-toggle(href="#", data-toggle="dropdown", role="button", aria-expanded="false")= "Toybox"
                             span.caret
-                        ul.dropdown-menu( role="menu" )
+                        ul.dropdown-menu(role="menu")
                             li
                                 a(href="#", role="button")= "Placeholder"
                     li
@@ -44,11 +45,19 @@ append body
     // Carousel
     .carousel(id="carousel-01", data-ride="carousel", class="slide")
         .carousel-inner(role="listbox")
-            .item.active(style="height: 200px")
+            .item.active(style="height: 250px")
                 img(src="http://i.huffpost.com/gen/2577354/images/o-ENCRYPTION-facebook.jpg", style="width:100%")
-                .carousel-caption
-                    h1 Affine Cipher
-                    p Week 3 Practical Exercices
+            .item(style="height: 250px")
+                img(src="http://tech.eu/wp-content/uploads/2014/04/ZenMate.jpg", style="width:100%")
+            .carousel-caption
+                h1 Information Security
+                p Practical Exercices
+        a.left.carousel-control(href="#carousel-01", role="button", data-slide="prev")
+            +icon("chevron-left")
+            span.sr-only Previous
+        a.right.carousel-control(href="#carousel-01", role="button", data-slide="next")
+            +icon("chevron-right")
+            span.sr-only Next
 
     // Main
     .container
@@ -58,12 +67,16 @@ append body
             +tab("0","active")
                 br
                 +label-info("Detail")
-                ul
-                    li Use strong affine cipher.
-                    li Assume the mapping of A - 0, B - 1, C - 2, ..., Z - 25.
-                    li #[i#[strong  a = 9]] and #[i#[strong b = 2]]
+                .row.container
+                    br
+                    ul
+                        li Use strong affine cipher.
+                        li Assume the mapping of A - 0, B - 1, C - 2, ..., Z - 25.
+                        li <i><strong>a = 9</strong></i> and <i><strong>b = 2</strong></i>
                 br
-                .row
+                +label-danger("Answer")
+                .row.container
+                    br
                     .col-md-12
                         .form-group
                             .input-group
@@ -79,12 +92,17 @@ append body
             +tab("1")
                 br
                 +label-info("Detail")
-                ul
-                    li Encrypt your first, middle, and last names using a shift cipher.
-                    li Concatenate the three names with no punctuation marks or spaces.
-                    li #[i#[strong k = 7]]
+                .row.container
+                    br
+                    ul
+                        li Encrypt your first, middle, and last names using a shift cipher.
+                        li Concatenate the three names with no punctuation marks or spaces.
+                        li <i><strong>k = 7</strong></i>
+
                 br
-                .row
+                +label-danger("Answer")
+                .row.container
+                    br
                     .col-md-12
                         .form-group
                             .input-group
@@ -98,17 +116,21 @@ append body
             +tab("2")
                 br
                 +label-info("Detail")
-                ul
-                    li Encrypt: "#[i The only thing we have to fear is fear itself]".
-                    li Use affine cipher.
-                    li Ignore punctuation marks and spaces.
-                    li Get and validate #[i#[strong a]], #[i#[strong b]] from user's input.
+                .row.container
+                    br
+                    ul
+                        li Encrypt: "<i>The only thing we have to fear is fear itself</i>".
+                        li Use affine cipher.
+                        li Ignore punctuation marks and spaces.
+                        li Get and validate <i><strong>a</strong></i>, <i><strong>b</strong></i> from user's input.
                 br
-                form(id="form")
+                +label-danger("Answer")
+                br
+                form.toggle-disabled(id="form" action="#" onsubmit="return false;")
                     .row
+                        br
                         .col-md-3
                         .col-md-6
-                            button(type="button", style="display: none; width: 0px; height: 0px;")
                             .form-group
                                 .input-group
                                     .input-group-addon
@@ -126,7 +148,7 @@ append body
                                 .input-group
                                     input.form-control(type="text", id="code3", value="The only thing we have to fear is fear itself", readonly)
                                     span.input-group-btn
-                                        button.btn.btn-default(type="button",aria-label="eye-open", onclick="decrypt_03()")
+                                        button.btn.btn-default(type="submit", id="button3", aria-label="eye-open", onclick="decrypt_03()")
                                             +icon("eye-open")
                                     input.form-control(type="text", id="result3", placeholder="Encrypted text will be displayed here", readonly)
 
@@ -134,12 +156,17 @@ append body
             +tab("3")
                 br
                 +label-info("Detail")
-                ul
-                    li What is the size of the key space of an affine cipher that uses the letters of the #[strong Greek alphabet]?
-                p Since the Greek alphabet has 24 characters, the key space will be 24.
+                .row.container
+                    br
+                    ul
+                        li What is the size of the key space of an affine cipher that uses the letters of the #[strong Greek alphabet]?
+                br
+                +label-danger("Answer")
+                .row.container
+                    br
+                    p Since the Greek alphabet has 24 characters, the key space will be 24.
 
     // Footer
     footer.footer
         .container
             p.text-muted Le Minh Pham Hoang - SE03035 - CS0801
-
