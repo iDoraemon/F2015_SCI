@@ -55,7 +55,7 @@ function squareAndMultiply(m, e, n) {
     var z = 1,
         y = m,
         e = e.toString(2);
-    for (i=1; i <= e.length; i++) {
+    for (var i=1; i <= e.length; i++) {
         if (e[i-1] == 1) {
             z = mod(z * y, n);
         }
