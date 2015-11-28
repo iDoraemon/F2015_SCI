@@ -110,7 +110,7 @@ append body
                                                             button.btn.btn-default(type="button",aria-label="eye-open", onclick="func01()", id="button1")
                                                                 +icon("eye-open")
                                                 .form-group
-                                                    input.form-control(type="text", id="result1", placeholder="Encrypted text will be displayed here", readonly)
+                                                    input.form-control(type="text", id="result1", placeholder="Plaintext", readonly)
                                         blockquote(id="quote", style="display:none")
                                             p How old would you be if you didn't know how old you are?
                                             small <cite>Satchel Paige</cite>
@@ -138,7 +138,7 @@ append body
                                                             button.btn.btn-default(type="button",aria-label="eye-open", onclick="func02()")
                                                                 +icon("eye-open")
                                                 .form-group
-                                                    input.form-control(type="text", id="result2", placeholder="Encrypted text will be displayed here", readonly)
+                                                    input.form-control(type="text", id="result2", placeholder="Ciphertext", readonly)
 
                                 // Problem 3.4.4
                                 .tab-pane.fade(id="w3_p3")
@@ -177,7 +177,7 @@ append body
                                                                     button.btn.btn-default(type="submit", id="button3", aria-label="eye-open", onclick="func03()")
                                                                         +icon("eye-open")
                                                         .form-group
-                                                            input.form-control(type="text", id="result3", placeholder="Encrypted text will be displayed here", readonly)
+                                                            input.form-control(type="text", id="result3", placeholder="Ciphertext", readonly)
 
                                 // Problem 3.4.5
                                 .tab-pane.fade(id="w3_p4")
@@ -276,9 +276,9 @@ append body
                                                 .row
                                                     .col-md-5
                                                         .form-group
-                                                            input.form-control(type="text", id="w4_ex2_result1", placeholder="Result will be displayed here", readonly)
+                                                            input.form-control(type="text", id="w4_ex2_result1", placeholder="Ciphertext", readonly)
                                                         .form-group
-                                                            input.form-control(type="text", id="w4_ex2_result2", placeholder="Result will be displayed here", readonly)
+                                                            input.form-control(type="text", id="w4_ex2_result2", placeholder="Plaintext", readonly)
                                                         .form-group
                                                             .input-group
                                                                 .input-group-btn
@@ -308,4 +308,4 @@ append body
                                                                 span.input-group-btn
                                                                     button.btn.btn-primary(type="submit", id="w4_ex3_button", aria-label="eye-open", onclick="func07()")
                                                                         +icon("eye-open")
-                                                                input.form-control(type="text", id="w4_ex3_result", placeholder="Result will be displayed here", readonly)
+                                                                input.form-control(type="text", id="w4_ex3_result", placeholder="Plaintext", readonly)
