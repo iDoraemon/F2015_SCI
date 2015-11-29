@@ -13,7 +13,7 @@ append body
         $(document).ready(function() {
             $.validate({
                 modules : 'toggleDisabled',
-                form: '#form'
+                form: '#form, #w4_ex1_form'
             });
             $('.hide').hide();
             $('#button1').click(function() {
@@ -265,7 +265,7 @@ append body
                                             p Encrypt and decrypt using the RSA cryptosystem with the parameters:
                                             ol(type="a")
                                                 li p = 3, q = 11, a = 7, x = 5
-                                                li p = 5, q = 11, a = 3, x = 9
+                                                li p = 5, q = 11, b = 3, x = 9
                                             p Apply <strong><cite>Square-And-Multiply Algorithm</cite></strong> whenever possible.
                                             br
                                     .row

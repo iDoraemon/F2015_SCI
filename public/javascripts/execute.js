@@ -52,14 +52,13 @@ function leastFactor(n){
 
 // Square and multiply algorithm
 function squareAndMultiply(m, e, n) {
-    var z = 1,
-        y = m,
-        e = e.toString(2);
-    for (var i=1; i <= e.length; i++) {
-        if (e[i-1] == 1) {
-            z = mod(z * y, n);
+    var z = 1, string = e.toString(2).split('');
+
+    for (var i=0; i < string.length; i++) {
+        z = (z * z) % n;
+        if (parseInt(string[i]) == 1) {
+            z = (z * m) % n;
         }
-        y = mod(y * y, n);
     }
     return z;
 }
@@ -74,7 +73,7 @@ function findInverse(a, n) {
         r = [newr, newr = r - quotient * newr][0];
     }
     if (r > 1) {
-        return;
+        return false;
     }
     if (t < 0) {
         t = t + n;
@@ -170,14 +169,14 @@ function func05() {
 }
 
 function func06() {
-    const p = 5, q = 11, publicKey = 3, message = 9;
+    const p = 5, q = 11, secretKey = 3, message = 9;
 
     // preparation
     var modulus = p * q;
     var totient = (p - 1) * (q - 1);
 
     // generate secret key
-    var secretKey = findInverse(publicKey, totient);
+    var publicKey = findInverse(secretKey, totient);
 
     // cipher and decipher
     var encrypted = squareAndMultiply(message, publicKey, modulus);
@@ -188,13 +187,15 @@ function func06() {
 }
 
 function func07() {
-    const p = 97, q = 101, publicKey = 1003, cipherText = 2709;
+    const p = 97, q = 101, secretKey = 1003, cipherText = 2709;
 
     var modulus = p * q;
+    console.log(modulus);
     var totient = (p - 1) * (q - 1);
 
     // generate secret key
-    var secretKey = findInverse(publicKey, totient);
-
+    var publicKey = findInverse(secretKey, totient);
+    console.log(publicKey);
+    console.log(squareAndMultiply(5682, 67, modulus));
     document.getElementById("w4_ex3_result").value = squareAndMultiply(cipherText, secretKey, modulus);
 }
