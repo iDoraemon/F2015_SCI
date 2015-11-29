@@ -190,12 +190,9 @@ function func07() {
     const p = 97, q = 101, secretKey = 1003, cipherText = 2709;
 
     var modulus = p * q;
-    console.log(modulus);
     var totient = (p - 1) * (q - 1);
 
     // generate secret key
     var publicKey = findInverse(secretKey, totient);
-    console.log(publicKey);
-    console.log(squareAndMultiply(5682, 67, modulus));
     document.getElementById("w4_ex3_result").value = squareAndMultiply(cipherText, secretKey, modulus);
 }
