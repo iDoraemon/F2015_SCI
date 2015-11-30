@@ -151,7 +151,25 @@ function func04() {
 }
 
 function func05() {
-    const p = 3, q = 11, publicKey = 7, message = 5;
+    const p = 3, q = 11, secretKey = 7, message = 5;
+
+    // preparation
+    var modulus = p * q;
+    var totient = (p - 1) * (q - 1);
+
+    // generate secret key
+    var publicKey = findInverse(secretKey, totient);
+
+    // cipher and decipher
+    var encrypted = squareAndMultiply(message, publicKey, modulus);
+    var decrypted = squareAndMultiply(encrypted, secretKey, modulus);
+
+    document.getElementById("w4_ex2_result1").value = encrypted;
+    document.getElementById("w4_ex2_result2").value = decrypted;
+}
+
+function func06() {
+    const p = 5, q = 11, publicKey = 3, message = 9;
 
     // preparation
     var modulus = p * q;
@@ -168,31 +186,13 @@ function func05() {
     document.getElementById("w4_ex2_result2").value = decrypted;
 }
 
-function func06() {
-    const p = 5, q = 11, secretKey = 3, message = 9;
-
-    // preparation
-    var modulus = p * q;
-    var totient = (p - 1) * (q - 1);
-
-    // generate secret key
-    var publicKey = findInverse(secretKey, totient);
-
-    // cipher and decipher
-    var encrypted = squareAndMultiply(message, publicKey, modulus);
-    var decrypted = squareAndMultiply(encrypted, secretKey, modulus);
-
-    document.getElementById("w4_ex2_result1").value = encrypted;
-    document.getElementById("w4_ex2_result2").value = decrypted;
-}
-
 function func07() {
-    const p = 97, q = 101, secretKey = 1003, cipherText = 2709;
+    const p = 97, q = 101, publicKey = 1003, cipherText = 2709;
 
     var modulus = p * q;
     var totient = (p - 1) * (q - 1);
 
     // generate secret key
-    var publicKey = findInverse(secretKey, totient);
+    var secretKey = findInverse(publicKey, totient);
     document.getElementById("w4_ex3_result").value = squareAndMultiply(cipherText, secretKey, modulus);
 }
