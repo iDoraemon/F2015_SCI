@@ -66,6 +66,8 @@ append body
                 a(href="#tab1", role="tab", data-toggle="tab")= "Week 4"
             li
                 a(href="#tab2", role="tab", data-toggle="tab")= "Week 5"
+            li
+                a(href="#tab3", role="tab", data-toggle="tab")= "Presentation Demo"
         br
         .tab-content
 
@@ -309,3 +311,122 @@ append body
                                                                     button.btn.btn-primary(type="submit", id="w4_ex3_button", aria-label="eye-open", onclick="func07()")
                                                                         +icon("eye-open")
                                                                 input.form-control(type="text", id="w4_ex3_result", placeholder="Plaintext", readonly)
+            // Presentation Demo
+            .tab-pane.fade(id="tab3")
+                .container
+                    .row
+                        .col-md-2
+                            ul.nav.nav-pills.nav-stacked
+                                li.active(role="presentation")
+                                    a(href="#demo_rsa" data-toggle="pill")= "RSA"
+                                li(role="presentation")
+                                    a(href="#demo_elgamal" data-toggle="pill")= "El Gamal"
+                                li(role="presentation")
+                                    a(href="#demo_elliptic" data-toggle="pill")= "Elliptic Curves"
+                        .col-md-1
+                        .col-md-9
+                            .tab-content
+
+                                // RSA
+                                .tab-pane.fade.in.active(id="demo_rsa")
+                                    .row
+                                        span.label(class="label-info")= "Detail"
+                                        .container
+                                            br
+                                            p This is a demonstration of the RSA in Digital Signatures:
+                                            br
+                                    .row
+                                        span.label(class="label-danger")= "Answer"
+                                        .container
+                                            br
+                                            form.toggle-disabled(id="demo_form" action="#" onsubmit="return false;")
+                                                .row
+                                                    .col-md-3
+                                                        .form-group
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Message"
+                                                                input.form-control(type="text", id="rsa_message")
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "p"
+                                                                input.form-control(type="number", id="rsa_p")
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "q"
+                                                                input.form-control(type="number", id="rsa_q")
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "n"
+                                                                input.form-control(type="number", id="rsa_n", readonly)
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Public key"
+                                                                input.form-control(type="number", id="rsa_public_key", readonly)
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Private key"
+                                                                input.form-control(type="number", id="rsa_private_key", readonly)
+                                                    .col-md-4
+                                                        .form-group
+                                                            .input-group
+                                                                span.input-group-btn
+                                                                    button.btn.btn-primary(type="submit", id="rsa_generate", aria-label="eye-open", onclick="func08()")
+                                                                        = "Generate"
+                                                                input.form-control(type="text", id="rsa_signature", placeholder="Signature", readonly)
+                                                            .input-group
+                                                                span.input-group-btn
+                                                                    button.btn.btn-primary(type="submit", id="rsa_validate", aria-label="eye-open", onclick="func09()")
+                                                                        = "Validate"
+                                                                input.form-control(type="number", id="rsa_message_validate", placeholder="Message", readonly)
+                                                                input.form-control(type="number", id="rsa_check", placeholder="Message", readonly)
+                                // El Gamal
+                                .tab-pane.fade.in(id="demo_elgamal")
+                                    .row
+                                        span.label(class="label-info")= "Detail"
+                                        .container
+                                            br
+                                            p This is a demonstration of El Gamal in Digital Signatures:
+                                            br
+                                    .row
+                                        span.label(class="label-danger")= "Answer"
+                                        .container
+                                            br
+                                            form.toggle-disabled(id="demo_form_elgamal" action="#" onsubmit="return false;")
+                                                .row
+                                                    .col-md-3
+                                                        .form-group
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Message"
+                                                                input.form-control(type="text", id="eg_message")
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "p"
+                                                                input.form-control(type="number", id="eg_p")
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Alpha"
+                                                                input.form-control(type="number", id="eg_alpha", value='2')
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Secret key a"
+                                                                input.form-control(type="number", id="eg_a", readonly)
+                                                            .input-group
+                                                                .input-group-addon
+                                                                    = "Beta"
+                                                                input.form-control(type="number", id="eg_beta", readonly)
+                                                    .col-md-4
+                                                        .form-group
+                                                            .input-group
+                                                                span.input-group-btn
+                                                                    button.btn.btn-primary(type="submit", id="eg_generate", aria-label="eye-open", onclick="func10()")
+                                                                        = "Generate"
+                                                                input.form-control(type="number", id="eg_gamma", placeholder="Signature", readonly)
+                                                                input.form-control(type="number", id="eg_delta", placeholder="Signature", readonly)
+                                                            .input-group
+                                                                span.input-group-btn
+                                                                    button.btn.btn-primary(type="submit", id="eg_validate", aria-label="eye-open", onclick="func11()")
+                                                                        = "Validate"
+                                                                input.form-control(type="number", id="eg_message_estimate", placeholder="Message", readonly)
+                                                                input.form-control(type="number", id="eg_message_real", placeholder="Message", readonly)
