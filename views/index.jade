@@ -2,7 +2,8 @@ extends ../node_modules/jade-bootstrap/_bootstrap
 
 append body
     script.
-        $.formUtils.addValidator({
+        $.formUtils.addValidator(
+        {
             name: 'checkGCD',
             validatorFunction: function(value, $el, config, language, $form) {
                 return (gcd(value, 26) == 1);
@@ -10,10 +11,19 @@ append body
             errorMessage: 'Enter a such that GCD(a, 26) = 1',
             errorMessageKey: 'badNumber'
         });
+        $.formUtils.addValidator(
+                {
+                    name: 'checkPrime',
+                    validatorFunction: function (value, $el, config, language, $form) {
+                        return (isPrime(value));
+                    },
+                    errorMessage: 'Must be prime',
+                    errorMessageKey: 'badNumber'
+                });
         $(document).ready(function() {
             $.validate({
                 modules : 'toggleDisabled',
-                form: '#form, #w4_ex1_form'
+                form: '#form, #w4_ex1_form, #demo_form_elgamal, #demo_form_rsa'
             });
             $('.hide').hide();
             $('#button1').click(function() {
@@ -333,28 +343,28 @@ append body
                                         span.label(class="label-info")= "Detail"
                                         .container
                                             br
-                                            p This is a demonstration of the RSA in Digital Signatures:
+                                            p This is a demonstration of the <strong>RSA</strong> in Digital Signatures:
                                             br
                                     .row
                                         span.label(class="label-danger")= "Answer"
                                         .container
                                             br
-                                            form.toggle-disabled(id="demo_form" action="#" onsubmit="return false;")
+                                            form.toggle-disabled(id="demo_form_rsa" action="#" onsubmit="return false;")
                                                 .row
                                                     .col-md-3
                                                         .form-group
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "Message"
-                                                                input.form-control(type="text", id="rsa_message")
+                                                                input.form-control(type="text", id="rsa_message", data-validation="required", data-validation-error-msg="Must not be blank")
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "p"
-                                                                input.form-control(type="number", id="rsa_p")
+                                                                input.form-control(type="number", id="rsa_p", data-validation="checkPrime")
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "q"
-                                                                input.form-control(type="number", id="rsa_q")
+                                                                input.form-control(type="number", id="rsa_q", data-validation="checkPrime")
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "n"
@@ -399,11 +409,11 @@ append body
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "Message"
-                                                                input.form-control(type="text", id="eg_message")
+                                                                input.form-control(type="text", id="eg_message", data-validation="required")
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "p"
-                                                                input.form-control(type="number", id="eg_p")
+                                                                input.form-control(type="number", id="eg_p", data-validation="checkPrime")
                                                             .input-group
                                                                 .input-group-addon
                                                                     = "Alpha"

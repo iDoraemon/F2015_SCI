@@ -12,6 +12,12 @@ function gcd(a, b) {
     return gcd(b, a % b);
 }
 
+// Check Prime
+function isPrime(n) {
+    if (isNaN(n) || !isFinite(n) || n%1 || n<2) return false;
+    if (n==leastFactor(n)) return true;
+    return false;
+}
 // Find mod
 function mod(a, b) {
     return ((a % b) + b) % b;
@@ -229,7 +235,7 @@ function func09() {
     var signature = parseInt(document.getElementById("rsa_signature").value);
     var message = parseInt(document.getElementById("rsa_message").value);
     var publicKey = parseInt(document.getElementById("rsa_public_key").value);
-    var n = document.getElementById("rsa_n").value;
+    var n = parseInt(document.getElementById("rsa_n").value);
     var validatedSignature = squareAndMultiply(signature, publicKey, n);
     var check = mod(message, n);
 
