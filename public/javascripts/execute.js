@@ -12,6 +12,12 @@ function gcd(a, b) {
     return gcd(b, a % b);
 }
 
+// Check Prime
+function isPrime(n) {
+    if (isNaN(n) || !isFinite(n) || n%1 || n<2) return false;
+    if (n==leastFactor(n)) return true;
+    return false;
+}
 // Find mod
 function mod(a, b) {
     return ((a % b) + b) % b;
@@ -52,14 +58,12 @@ function leastFactor(n){
 
 // Square and multiply algorithm
 function squareAndMultiply(m, e, n) {
-    var z = 1,
-        y = m,
-        e = e.toString(2);
-    for (var i=1; i <= e.length; i++) {
-        if (e[i-1] == 1) {
-            z = mod(z * y, n);
+    var z = 1, string = e.toString(2).split('');
+    for (var i=0; i < string.length; i++) {
+        z = (z * z) % n;
+        if (parseInt(string[i]) == 1) {
+            z = (z * m) % n;
         }
-        y = mod(y * y, n);
     }
     return z;
 }
@@ -74,7 +78,7 @@ function findInverse(a, n) {
         r = [newr, newr = r - quotient * newr][0];
     }
     if (r > 1) {
-        return;
+        return false;
     }
     if (t < 0) {
         t = t + n;
@@ -152,14 +156,14 @@ function func04() {
 }
 
 function func05() {
-    const p = 3, q = 11, publicKey = 7, message = 5;
+    const p = 3, q = 11, secretKey = 7, message = 5;
 
     // preparation
     var modulus = p * q;
     var totient = (p - 1) * (q - 1);
 
     // generate secret key
-    var secretKey = findInverse(publicKey, totient);
+    var publicKey = findInverse(secretKey, totient);
 
     // cipher and decipher
     var encrypted = squareAndMultiply(message, publicKey, modulus);
@@ -195,6 +199,92 @@ function func07() {
 
     // generate secret key
     var secretKey = findInverse(publicKey, totient);
-
     document.getElementById("w4_ex3_result").value = squareAndMultiply(cipherText, secretKey, modulus);
+}
+
+// Demo RSA
+// Generate signature
+function func08() {
+    // get p, q, message from input
+    var p = document.getElementById("rsa_p").value;
+    var q = document.getElementById("rsa_q").value;
+    var message = document.getElementById("rsa_message").value;
+
+    // preparation
+    var modulus = p * q;
+    var totient = (p - 1) * (q - 1);
+
+    // generate encryption key
+    var publicKey = randomPrime(totient);
+
+    // generate private key
+    var privateKey = findInverse(publicKey, totient);
+
+    // generate signature
+    var encrypted = squareAndMultiply(message, privateKey, modulus);
+
+    // output
+    document.getElementById("rsa_n").value = modulus;
+    document.getElementById("rsa_public_key").value = publicKey;
+    document.getElementById("rsa_private_key").value = privateKey;
+    document.getElementById("rsa_signature").value = encrypted;
+}
+
+// Validate signature
+function func09() {
+    var signature = parseInt(document.getElementById("rsa_signature").value);
+    var message = parseInt(document.getElementById("rsa_message").value);
+    var publicKey = parseInt(document.getElementById("rsa_public_key").value);
+    var n = parseInt(document.getElementById("rsa_n").value);
+    var validatedSignature = squareAndMultiply(signature, publicKey, n);
+    var check = mod(message, n);
+
+    // output
+    document.getElementById("rsa_message_validate").value = validatedSignature;
+    document.getElementById("rsa_check").value = check;
+}
+
+// Demo El Gamal
+// Generate Signature
+function func10() {
+    // get input
+    var x = document.getElementById("eg_message").value;
+    var p = document.getElementById("eg_p").value;
+    var alpha = document.getElementById("eg_alpha").value;
+
+    // calculate secret key a
+    var a = Math.floor(Math.random() * (p - 3)) + 2;
+
+    // calculate beta
+    var beta = squareAndMultiply(alpha, a, p);
+
+    // calculate k
+    while (true) {
+        var k = Math.floor(Math.random() * (p - 3)) + 2;
+        if (gcd(k, p-1) == 1) break;
+    }
+
+    // calculate gamma
+    var gamma = squareAndMultiply(alpha, k, p);
+    var delta = mod((x - a * gamma) * findInverse(k, p - 1), p - 1);
+
+    // output
+    document.getElementById("eg_a").value = a;
+    document.getElementById("eg_beta").value = beta;
+    document.getElementById("eg_gamma").value = gamma;
+    document.getElementById("eg_delta").value = delta;
+}
+
+// Validate
+function func11() {
+    var beta = parseInt(document.getElementById("eg_beta").value);
+    var gamma = parseInt(document.getElementById("eg_gamma").value);
+    var delta = parseInt(document.getElementById("eg_delta").value);
+    var alpha = parseInt(document.getElementById("eg_alpha").value);
+    var x = parseInt(document.getElementById("eg_message").value);
+    var p = parseInt(document.getElementById("eg_p").value);
+    var estimate = mod(squareAndMultiply(beta, gamma, p) * squareAndMultiply(gamma, delta, p), p);
+    var real = squareAndMultiply(alpha, x, p);
+    document.getElementById("eg_message_estimate").value = estimate;
+    document.getElementById("eg_message_real").value = real;
 }
