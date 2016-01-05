@@ -61,251 +61,40 @@ append body
 
     // Main
     .container(role="main")
-        ul.nav.nav-tabs(role="tablist")
-            li.active
-                a(href="#tab1", role="tab", data-toggle="tab")= "Week 3"
-            li
-                a(href="#tab2", role="tab", data-toggle="tab")= "Week 4"
-        br
-        .tab-content
-
-            // Tab 1
-            .tab-pane.fade.in.active(id="tab1")
-                .container
+        .row
+            +label-info("Detail")
+            .container
+                center Affine Cipher
+                br
+                ul
+                    li Encrypt: "<cite>The only thing we have to fear is fear itself</cite>".
+                    li Use affine cipher.
+                    li Ignore punctuation marks and spaces.
+                    li Get and validate <i><strong>a</strong></i>, <i><strong>b</strong></i> from user's input.
+            br
+        .row
+            +label-danger("Answer")
+            .container
+                br
+                form.toggle-disabled(id="form" action="#" onsubmit="return false;")
                     .row
                         .col-md-2
-                            ul.nav.nav-pills.nav-stacked
-                                li.active(role="presentation")
-                                    a(href="#w3_p1" data-toggle="pill")= "Problem 3.4.2"
-                                li(role="presentation")
-                                    a(href="#w3_p2" data-toggle="pill")= "Problem 3.4.3"
-                                li(role="presentation")
-                                    a(href="#w3_p3" data-toggle="pill")= "Problem 3.4.4"
-                                li(role="presentation")
-                                    a(href="#w3_p4" data-toggle="pill")= "Problem 3.4.5"
-                        .col-md-1
-                        .col-md-9
-                            .tab-content
-
-                                // Problem 3.4.2
-                                .tab-pane.fade.in.active(id="w3_p1")
-                                    .row
-                                        span.label(class="label-info")= "Detail"
-                                        .container
-                                            br
-                                            ul
-                                                li Use affine cipher.
-                                                li Assume the mapping of A - 0, B - 1, C - 2, ..., Z - 25.
-                                                li <i><strong>a = 9</strong></i> and <i><strong>b = 2</strong></i>
-                                            br
-                                    .row
-                                        span.label(class="label-danger")= "Answer"
-                                        .container
-                                            br
-                                            .col-md-6
-                                                .form-group
-                                                    .input-group
-                                                        input.form-control(type="text", id="code1", value='NYSYXDSYAXDKYALMWVKYADWDPROPYSNYSYXDKYACZM', readonly)
-                                                        span.input-group-btn
-                                                            button.btn.btn-default(type="button",aria-label="eye-open", onclick="func01()", id="button1")
-                                                                +icon("eye-open")
-                                                .form-group
-                                                    input.form-control(type="text", id="result1", placeholder="Plaintext", readonly)
-                                        blockquote(id="quote", style="display:none")
-                                            p How old would you be if you didn't know how old you are?
-                                            small <cite>Satchel Paige</cite>
-
-                                //Problem 3.4.3
-                                .tab-pane.fade(id="w3_p2")
-                                    .row
-                                        span.label(class="label-info")= "Detail"
-                                        .container
-                                            br
-                                            ul
-                                                li Encrypt your first, middle, and last names using a shift cipher.
-                                                li Concatenate the three names with no punctuation marks or spaces.
-                                                li <i><strong>k = 7</strong></i>
-                                            br
-                                    .row
-                                        span.label(class="label-danger")= "Answer"
-                                        .container
-                                            br
-                                            .col-md-6
-                                                .form-group
-                                                    .input-group
-                                                        input.form-control(type="text", id="code2", value="Le Minh Pham Hoang", placeholder="Enter your name")
-                                                        span.input-group-btn
-                                                            button.btn.btn-default(type="button",aria-label="eye-open", onclick="func02()")
-                                                                +icon("eye-open")
-                                                .form-group
-                                                    input.form-control(type="text", id="result2", placeholder="Ciphertext", readonly)
-
-                                // Problem 3.4.4
-                                .tab-pane.fade(id="w3_p3")
-                                    .row
-                                        +label-info("Detail")
-                                        .container
-                                            br
-                                            ul
-                                                li Encrypt: "<cite>The only thing we have to fear is fear itself</cite>".
-                                                li Use affine cipher.
-                                                li Ignore punctuation marks and spaces.
-                                                li Get and validate <i><strong>a</strong></i>, <i><strong>b</strong></i> from user's input.
-                                        br
-                                    .row
-                                        +label-danger("Answer")
-                                        .container
-                                            br
-                                            form.toggle-disabled(id="form" action="#" onsubmit="return false;")
-                                                .row
-                                                    .col-md-2
-                                                        .form-group
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "a"
-                                                                input.form-control(type="number", id="param1", value="11", placeholder="Enter a", data-validation="checkGCD" )
-                                                        .form-group
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "b"
-                                                                input.form-control(type="number", name="b", id="param2", value="15", placeholder="Enter b", data-validation="required", data-validation-error-msg="Must not be blank")
-                                                    .col-md-5
-                                                        .form-group
-                                                            .input-group
-                                                                input.form-control(type="text", id="code3", value="The only thing we have to fear is fear itself", readonly)
-                                                                span.input-group-btn
-                                                                    button.btn.btn-default(type="submit", id="button3", aria-label="eye-open", onclick="func03()")
-                                                                        +icon("eye-open")
-                                                        .form-group
-                                                            input.form-control(type="text", id="result3", placeholder="Ciphertext", readonly)
-
-                                // Problem 3.4.5
-                                .tab-pane.fade(id="w3_p4")
-                                    .row
-                                        +label-info("Detail")
-                                        .container
-                                            br
-                                            ul
-                                                li What is the size of the key space of an affine cipher that uses the letters of the #[strong Greek alphabet]?
-                                        br
-                                    .row
-                                        +label-danger("Answer")
-                                        .container
-                                            br
-                                            p Since the Greek alphabet has 24 characters, the key space will be 24.
-
-            // Week 4
-            .tab-pane.fade(id="tab2")
-                .container
-                    .row
-                        .col-md-2
-                            ul.nav.nav-pills.nav-stacked
-                                li.active(role="presentation")
-                                    a(href="#w4_p1" data-toggle="pill")= "Problem 6.9.4"
-                                li(role="presentation")
-                                    a(href="#w4_p2" data-toggle="pill")= "Problem 7.4.2"
-                                li(role="presentation")
-                                    a(href="#w4_p3" data-toggle="pill")= "Problem 7.4.8"
-                        .col-md-1
-                        .col-md-9
-                            .tab-content
-
-                                // Problem 6.9.4
-                                .tab-pane.fade.in.active(id="w4_p1")
-                                    .row
-                                        span.label(class="label-info")= "Detail"
-                                        .container
-                                            br
-                                            p Implement the <strong><cite>Extended Euclidean Algorithm</cite></strong> including the following features:
-                                            ul
-                                                li Has <i>r0</i> and <i>r1</i> as input parameters and return the values for <i>s</i>, <i>t</i>, <i>GCD(r0, r1)</i>.
-                                                li At the start of the function check whether <i>r0</i> > <i>r1</i>. If the check fails, swap the values of <i>r0</i> and <i>r1</i>.
-                                                li Must be able to perform all arithmetic with long type variables.
-                                            br
-                                    .row
-                                        span.label(class="label-danger")= "Answer"
-                                        .container
-                                            br
-                                            form.toggle-disabled(id="w4_ex1_form" action="#" onsubmit="return false;")
-                                                .row
-                                                    .col-md-2
-                                                        .form-group
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "r0"
-                                                                input.form-control(type="number", id="w4_ex1_param1",placeholder="Enter r0", data-validation="required" data-validation-error-msg="Must not be blank")
-                                                        .form-group
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "r1"
-                                                                input.form-control(type="number", name="b", id="w4_ex1_param2", placeholder="Enter r1", data-validation="required", data-validation-error-msg="Must not be blank")
-                                                        .form-group
-                                                            input.btn.btn-primary.btn-sm(type="submit", id="w4_ex1_button", aria-label="eye-open", onclick="func04()" value="Run")
-                                                    .col-md-5
-                                                        .form-group
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "s"
-                                                                input.form-control(type="text", id="w4_ex1_s", readonly)
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "t"
-                                                                input.form-control(type="text", id="w4_ex1_t", readonly)
-                                                            .input-group
-                                                                .input-group-addon
-                                                                    = "GCD(r0, r1)"
-                                                                input.form-control(type="text", id="w4_ex1_gcd", readonly)
-
-                                // Problem 7.4.2
-                                .tab-pane.fade(id="w4_p2")
-                                    .row
-                                        span.label(class="label-info")= "Detail"
-                                        .container
-                                            br
-                                            p Encrypt and decrypt using the RSA cryptosystem with the parameters:
-                                            ol(type="a")
-                                                li p = 3, q = 11, a = 7, x = 5
-                                                li p = 5, q = 11, a = 3, x = 9
-                                            p Apply <strong><cite>Square-And-Multiply Algorithm</cite></strong> whenever possible.
-                                            br
-                                    .row
-                                        span.label(class="label-danger")= "Answer"
-                                        .container
-                                            br
-                                            form.toggle-disabled(id="w4_ex2_form" action="#" onsubmit="return false;")
-                                                .row
-                                                    .col-md-5
-                                                        .form-group
-                                                            input.form-control(type="text", id="w4_ex2_result1", placeholder="Ciphertext", readonly)
-                                                        .form-group
-                                                            input.form-control(type="text", id="w4_ex2_result2", placeholder="Plaintext", readonly)
-                                                        .form-group
-                                                            .input-group
-                                                                .input-group-btn
-                                                                    button.btn.btn-primary(type="submit", id="w4_ex2_button1", aria-label="eye-open", onclick="func05()")= "Run Option 1"
-                                                                    button.btn.btn-primary(type="submit", id="w4_ex2_button2", aria-label="eye-open", onclick="func06()")= "Run Option 2"
-
-                                // Problem 7.4.8
-                                .tab-pane.fade(id="w4_p3")
-                                    .row
-                                        span.label(class="label-info")= "Detail"
-                                        .container
-                                            br
-                                            p For an RSA cryptosystem:
-                                            ul
-                                                li p = 97, q = 101, b = 1003
-                                            p Compute the plaintext for the ciphertext <cite>y</cite> = 2709.
-                                            br
-                                    .row
-                                        span.label(class="label-danger")= "Answer"
-                                        .container
-                                            br
-                                            form.toggle-disabled(id="w4_ex3_form" action="#" onsubmit="return false;")
-                                                .row
-                                                    .col-md-5
-                                                        .form-group
-                                                            .input-group
-                                                                span.input-group-btn
-                                                                    button.btn.btn-primary(type="submit", id="w4_ex3_button", aria-label="eye-open", onclick="func07()")
-                                                                        +icon("eye-open")
-                                                                input.form-control(type="text", id="w4_ex3_result", placeholder="Plaintext", readonly)
+                            .form-group
+                                .input-group
+                                    .input-group-addon
+                                        = "a"
+                                    input.form-control(type="number", id="param1", value="11", placeholder="Enter a", data-validation="checkGCD" )
+                            .form-group
+                                .input-group
+                                    .input-group-addon
+                                        = "b"
+                                    input.form-control(type="number", name="b", id="param2", value="15", placeholder="Enter b", data-validation="required", data-validation-error-msg="Must not be blank")
+                        .col-md-5
+                            .form-group
+                                .input-group
+                                    input.form-control(type="text", id="code3")
+                                    span.input-group-btn
+                                        button.btn.btn-default(type="submit", id="button3", aria-label="eye-open", onclick="func03()")
+                                            +icon("eye-open")
+                            .form-group
+                                input.form-control(type="text", id="result3", placeholder="Ciphertext", readonly)
